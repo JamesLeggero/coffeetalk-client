@@ -19,7 +19,7 @@ const http = require("http");
 const app = express();
 const server = http.createServer(app);
 const socket = require("socket.io");
-const io = socket(server);
+const io = socket();
 const path = require('path')
 
 app.use(express.static('build'))
