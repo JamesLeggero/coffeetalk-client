@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import axios from "axios";
 
+import CreateRoom from './components/CreateRoom/CreateRoom'
+import Room from './components/Room/Room'
 import FarmerList from './components/FarmerList/FarmerList'
 
 function App() {
@@ -27,12 +29,10 @@ function App() {
 
   return (
     <div className="App">
+      <FarmerList />
       <Switch>
-        <Route
-        path='/'
-        render={() => {
-          return <FarmerList />
-        }}
+        <Route path='/' exact component={CreateRoom} />
+        <Route path='/room/:roomID' exact component={Room}
         />
       </Switch>
       
