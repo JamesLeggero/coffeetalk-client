@@ -22,9 +22,11 @@ const socket = require("socket.io");
 const io = socket(server);
 const path = require('path')
 
+app.use(express.static('build'))
+
 app.get('*', (req, res)=>{
     res.sendFile(path.join(`${__dirname}/build/index.html`))
 })
 
-const port = process.env.PORT || 3001
-server.listen(port, () => console.log(`running on ${port}`))
+const PORT = process.env.PORT || 3000
+server.listen(PORT)
