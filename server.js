@@ -13,9 +13,9 @@
 
 // app.listen(PORT)
 
-import openSocket from 'socket.io-client'
-const url = 'https://jml-coffeetalk-client.herokuapp.com/'
-const socket = openSocket(url)
+// import openSocket from 'socket.io-client'
+// const url = 'https://jml-coffeetalk-client.herokuapp.com/'
+// const socket = openSocket(url)
 require('dotenv').config();
 const express = require("express");
 const http = require("http");
@@ -25,9 +25,9 @@ const server = http.createServer(app);
 // const io = socket(server);
 const path = require('path')
 
-socket.on('connect', () => {
-    console.log('conneted to', url)
-})
+// socket.on('connect', () => {
+//     console.log('conneted to', url)
+// })
 
 app.use(express.static('build'))
 
@@ -36,4 +36,4 @@ app.get('*', (req, res)=>{
 })
 
 const PORT = process.env.PORT || 3000
-app.listen(PORT)
+server.listen(PORT)
