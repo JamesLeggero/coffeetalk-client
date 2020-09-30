@@ -2,12 +2,14 @@ import React from "react";
 // import "./FarmerShow.css";
 
 function FarmerShow(props) {
-  const { imageUrl, username } = props.farmer;
+  const { imageUrl, username, _id } = props.farmer;
+
   return (
     <div className="farmer-preview">
       <img src={imageUrl} alt={username} className="farmer-image" />
       <h3>{username}</h3>
-      {props.isLoggedIn ? <button>Coffeetalk with {username}</button> : ""}
+      {/* {props.isLoggedIn ? <button>Coffeetalk with {username}</button> : ""} */}
+      <button id={_id} onClick={props.handleCreateRoom}>Coffeetalk with {username}</button>
     </div>
   );
 }
