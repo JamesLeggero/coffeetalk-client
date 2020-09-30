@@ -1,24 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import { Route, Switch } from "react-router-dom";
+import axios from "axios";
+
+import FarmerList from './components/FarmerList/FarmerList'
 
 function App() {
+
+  const [roasterState, setRoasterState] = useState({
+    username: '',
+    password: '',
+    isLoggedin: false
+  })
+  
+  const [roasterIsLoggedIn, setRoasterisLoggedIn] = useState(false)
+
+  useEffect(() => {
+    if (localStorage.token) {
+      setRoasterisLoggedIn(true)
+    } else {
+      setRoasterisLoggedIn(false)
+    }
+  }, [roasterIsLoggedIn])
+
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Switch>
+        <Route
+        path='/'
+        render={() => {
+          return <FarmerList />
+        }}
+        />
+      </Switch>
+      
     </div>
   );
 }
