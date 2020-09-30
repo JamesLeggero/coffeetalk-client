@@ -19,7 +19,7 @@ const http = require("http");
 const app = express();
 const server = http.createServer(app);
 const socket = require("socket.io");
-const io = socket();
+const io = socket(server);
 const path = require('path')
 
 app.use(express.static('build'))
@@ -30,3 +30,4 @@ app.get('*', (req, res)=>{
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT)
+server.listen()
