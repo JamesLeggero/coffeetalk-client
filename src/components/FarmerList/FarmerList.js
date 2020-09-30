@@ -11,7 +11,7 @@ const FarmerList = (props) => {
   useEffect(() => {
     // Need to wrap this in an async function to use await inside:
     async function fetchData() {
-      const response = await axios.get("http://localhost:3001/farmers");
+      const response = await axios.get("https://jml-coffeetalk-api.herokuapp.com/farmers");
       setFarmers(response.data);
     }
     fetchData();
@@ -31,7 +31,7 @@ useEffect(() => {}, [farmer])
   const handleCreateRoom = async event => {
     event.persist()
     try {
-        const response = await axios.get(`http://localhost:3001/farmers/${event.target.id}`)
+        const response = await axios.get(`https://jml-coffeetalk-api.herokuapp.com/farmers/${event.target.id}`)
         const data = await response.data
         
         // await console.log(data)
