@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useHistory } from "react";
 import { Route, Switch } from "react-router-dom";
 import axios from "axios";
 
@@ -14,6 +14,7 @@ function App() {
     password: '',
     isLoggedin: false
   })
+
   
   const [roasterIsLoggedIn, setRoasterisLoggedIn] = useState(false)
 
@@ -31,7 +32,7 @@ function App() {
   return (
     <div className="App">
       <FarmerList />
-      <WeatherTest />
+      {/* <WeatherTest /> */}
       <Switch>
         <Route path='/' exact component={CreateRoom} />
         <Route path='/room/:roomID' exact component={Room}/>
