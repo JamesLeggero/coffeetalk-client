@@ -5,6 +5,7 @@ import axios from "axios";
 import CreateRoom from './components/CreateRoom/CreateRoom'
 import Room from './components/Room/Room'
 import FarmerList from './components/FarmerList/FarmerList'
+import WeatherTest from './components/WeatherTest/WeatherTest'
 
 function App() {
 
@@ -30,10 +31,10 @@ function App() {
   return (
     <div className="App">
       <FarmerList />
+      <WeatherTest />
       <Switch>
         <Route path='/' exact component={CreateRoom} />
-        <Route path='/room/:roomID' exact component={Room}
-        />
+        <Route path='/room/:roomID' exact component={Room}/>
       </Switch>
       
     </div>
