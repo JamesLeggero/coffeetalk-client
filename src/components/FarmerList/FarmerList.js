@@ -35,18 +35,37 @@ useEffect(() => {}, [farmer])
         const farmerResponse = await axios.get(`http://localhost:3001/farmers/${event.target.id}`)
         const farmerData = await farmerResponse.data
         
-        await console.log(`http://localhost:3001/${farmerData.farmerLocation}`)
-        await setFarmer({...farmer, ...farmerData})
-        const weatherResponse = await axios.get(`http://localhost:3001/${farmerData.farmerLocation}`)
-        const weatherData = await weatherResponse.data
-        await setLocation({...weatherData})
-        await console.log(location)
+        // await console.log(`http://localhost:3001/${farmerData.farmerLocation}`)
+        setFarmer({...farmer, ...farmerData})
+        //weather
+        // await console.log(location)
+        weatherHit(farmerData)
+        smsHit(farmerData)
         // await console.log(farmer)
         // await console.log(weatherData.name)
     } catch (error) {
         console.error(error)
     }
-}
+  }
+  
+  const weatherHit = async data => {
+    try{
+      const weatherResponse = await axios.get(`http://localhost:3001/weather/${data.farmerLocation}`)
+        const weatherData = await weatherResponse.data
+        setLocation({...weatherData})
+    } catch (error) {
+      console.error(error)
+    }
+
+  }
+
+  const smsHit = async data => {
+    const smsResponse = await axios.get(`http://localhost:3001/sms/${data.phoneNumber}`)
+    const smsData = await smsResponse.data
+    console.log('calling: ', smsData)
+
+
+  }
 
   const showFarmers = farmers.map((farmer, i) => {
     return (
