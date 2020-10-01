@@ -5,6 +5,7 @@ import FarmerShow from "../FarmerShow/FarmerShow";
 
 const FarmerList = (props) => {
   const [farmers, setFarmers] = useState([]);
+  const [location, setLocation] = useState({})
   
 
 
@@ -31,12 +32,17 @@ useEffect(() => {}, [farmer])
   const handleCreateRoom = async event => {
     event.persist()
     try {
-        const response = await axios.get(`http://localhost:3001/farmers/${event.target.id}`)
-        const data = await response.data
+        const farmerResponse = await axios.get(`http://localhost:3001/farmers/${event.target.id}`)
+        const farmerData = await farmerResponse.data
         
-        // await console.log(data)
-        await setFarmer({...farmer, ...data})
-        await console.log(farmer)
+        await console.log(`http://localhost:3001/${farmerData.farmerLocation}`)
+        await setFarmer({...farmer, ...farmerData})
+        const weatherResponse = await axios.get(`http://localhost:3001/${farmerData.farmerLocation}`)
+        const weatherData = await weatherResponse.data
+        await setLocation({...weatherData})
+        await console.log(location)
+        // await console.log(farmer)
+        // await console.log(weatherData.name)
     } catch (error) {
         console.error(error)
     }
@@ -54,6 +60,13 @@ useEffect(() => {}, [farmer])
        <div>
            {showFarmers}
            <h3>SELECTED: {farmer.username}</h3>
+           {Object.keys(location).length > 0 &&
+            <>
+           <h3>City: {location.name}, {location.sys.country}</h3>
+           <h3>WEATHER: {location.weather[0].description}</h3>
+           </>
+           }
+           
         </div>
   )
       
