@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
+import { useLocation } from 'react-router-dom'
 import io from "socket.io-client";
 import axios from 'axios'
 
@@ -121,13 +122,25 @@ const Room = (props) => {
     };
 
     const [location, setLocation] = useState({})
+    const [farmer, setFarmer] = useState({})
+
+    const farmerLoad = useLocation()
+    console.log(farmerLoad.state)
 
     useEffect(() => {
         async function weatherHit() {
             try {
-                const weatherResponse = await axios.get(`http://localhost:3001/weather/${props.farmer.farmerLocation}`)
+
+                const farmerResponse = await axios.get(`http://localhost:3001/farmers/${props.farmer._id}`)
+                const farmerData = farmerResponse.data
+                setFarmer(farmerData)
+                // setFarmer(farmerLoad.state)
+                // console.log(farmerData)
+
+                // const weatherResponse = await axios.get(`http://localhost:3001/weather/${farmerData.farmerLocation}`)
+                const weatherResponse = await axios.get(`http://localhost:3001/weather/${farmerData.farmerLocation}`)
                 const weatherData = await weatherResponse.data
-                console.log(weatherData.weather[0])
+                // console.log(weatherData.weather[0])
                 await setLocation({ ...weatherData })
               } catch (error) {
                 console.error(error)
@@ -136,15 +149,17 @@ const Room = (props) => {
         weatherHit()
     }, [])
 
-    // const [farmer, setFarmer] = useState({})
+    
 
     // useEffect(() => {
     //     async function fetchFarmer() {
     //         const response = await axios.get(`http://localhost:3001/farmers/${props.farmer._id}`)
     //         setFarmer(response.data)
+    //         // console.log(response.data)
     //     }
     //     fetchFarmer()
-    // }, [farmer])
+    // }, [])
+
 
     return (
         <div>

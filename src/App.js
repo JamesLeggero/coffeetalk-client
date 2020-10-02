@@ -49,12 +49,12 @@ function App() {
 
   const history = useHistory()
   
-  const createRoom = () => {
+  const createRoom = (data) => {
     const id = uuid();
     const roomID = `/room/${id}`
     // props.history.push(roomID)
     const roomURL = `http://localhost:3000${roomID}`
-    history.push(`/room/${id}`)
+    history.push(`/room/${id}`, {state: {farmer: data}})
   
     // console.log(roomURL)
     // return roomID
@@ -75,7 +75,7 @@ function App() {
       // await console.log(location.name)
       // smsHit(farmerData)
 
-      createRoom()
+      createRoom(farmerData)
     } catch (error) {
       console.error(error)
     }
@@ -137,7 +137,7 @@ function App() {
         {/* <Route path='/' exact component={Lobby}>
           <Lobby pop={pop} handleCreateRoom={handleCreateRoom}/>
         </Route> */}
-        <Route path='/' exact component={CreateRoom} />
+        <Route path='/' exact component={Lobby} />
         {/* <Route path='/room/:roomID/' exact component={Room} /> */}
         <Route path='/room/:roomID' render={(props)=><Room testOb={testOb} farmer={farmer} {...props}/>} />
         

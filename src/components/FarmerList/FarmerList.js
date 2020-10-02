@@ -96,6 +96,7 @@ const FarmerList = (props) => {
   return (
     <div>
       {showFarmers}
+      {/*
       <h3>SELECTED: {farmer.username}</h3>
       {Object.keys(location).length > 0 &&
         <>
@@ -103,6 +104,7 @@ const FarmerList = (props) => {
           <h3>WEATHER: {location.weather[0].description}</h3>
         </>
       }
+    */}
 
     </div>
   )
