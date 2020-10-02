@@ -9,6 +9,8 @@ import FarmerList from './components/FarmerList/FarmerList'
 import WeatherTest from './components/WeatherTest/WeatherTest'
 import Lobby from './components/Lobby/Lobby'
 import FarmerShow from './components/FarmerShow/FarmerShow'
+import Navbar from './components/Navbar/Navbar'
+import FarmerSignUp from "./components/FarmerSignUp/FarmerSignUp";
 
 function App() {
 
@@ -28,6 +30,26 @@ function App() {
   //     setRoasterisLoggedIn(false)
   //   }
   // }, [roasterIsLoggedIn])
+
+  const [farmerState, setFarmerState] = useState({
+      username: '',
+      password: '',
+      farmerLocation: '',
+      phoneNumber: '',
+      imageURL: '',
+      isLoggedin: false
+    })
+  
+    
+    const [farmerIsLoggedIn, setFarmerIsLoggedIn] = useState(false)
+  
+    useEffect(() => {
+      if (localStorage.token) {
+        setFarmerIsLoggedIn(true)
+      } else {
+        setFarmerIsLoggedIn(false)
+      }
+    }, [farmerIsLoggedIn])
 
   const [location, setLocation] = useState({})
   
@@ -81,6 +103,28 @@ function App() {
     }
   }
 
+  const handleFarmerInput = (event) => {
+    setFarmerState({ ...farmerState, [event.target.name]: event.target.value });
+  };
+
+  const handleFarmerSignup = async event => {
+    event.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:3001/farmers/signup", {
+        username: farmerState.email,
+        password: farmerState.password,
+        farmerLocation: farmerState.farmerLocation,
+        phoneNumber: farmerState.phoneNumber,
+        imageURL: farmerState.imageURL
+      });
+      console.log(response);
+      localStorage.token = response.data.token;
+      setFarmerIsLoggedIn(true);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   // // const handleCreateRoom = event => {
   // //   event.persist()
   // //   console.log('clicked')
@@ -129,6 +173,7 @@ function App() {
 
   return (
     <div className="App">
+      <Navbar farmerIsLoggedIn={farmerIsLoggedIn} />
       <FarmerList handleCreateRoom={handleCreateRoom}/>
       {/* <WeatherTest /> */}
       {/* <Router> */}
@@ -138,7 +183,12 @@ function App() {
           <Lobby pop={pop} handleCreateRoom={handleCreateRoom}/>
         </Route> */}
         <Route path='/' exact component={Lobby} />
-        {/* <Route path='/room/:roomID/' exact component={Room} /> */}
+        <Route path='/farmers/signup' render={props => {
+          return (
+            <FarmerSignUp farmerIsLoggedIn={farmerIsLoggedIn} handleFarmerSignup={handleFarmerSignup} handleFarmerInput={handleFarmerInput} />
+          )
+        }} />
+        
         <Route path='/room/:roomID' render={(props)=><Room testOb={testOb} farmer={farmer} {...props}/>} />
         
           {/* <Room farmer={farmer} location={location}/> */}
