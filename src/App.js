@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Switch, useHistory } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, useHistory, Link } from "react-router-dom";
 import axios from "axios";
 import { v1 as uuid } from 'uuid'
 
@@ -117,25 +117,31 @@ function App() {
   //   );
   // });
 
-
+  const testOb = {
+    test: 'one',
+    this: 'two',
+    thing: 'three'
+  }
 
 
   return (
     <div className="App">
-      {/* <FarmerList /> */}
+      <FarmerList />
       {/* <WeatherTest /> */}
-      <Router>
+      {/* <Router> */}
       <Switch>
         {/* <Route path='/' exact component={Lobby} handleCreateRoom={handleCreateRoom} pop={pop}/> */}
         {/* <Route path='/' exact component={Lobby}>
           <Lobby pop={pop} handleCreateRoom={handleCreateRoom}/>
         </Route> */}
         <Route path='/' exact component={CreateRoom} />
-        <Route path='/room/:roomID' component={Room} />
+        {/* <Route path='/room/:roomID/' exact component={Room} /> */}
+        <Route path='/room/:roomID' render={(props)=><Room testOb={testOb} {...props}/>} />
+        
           {/* <Room farmer={farmer} location={location}/> */}
        
       </Switch>
-      </Router>
+      {/* </Router> */}
       
     </div>
   );

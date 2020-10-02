@@ -26,7 +26,7 @@ const Room = (props) => {
                 otherUser.current = userID;
             });
 
-            socketRef.current.on("offer", handleReceiveCall);
+            socketRef.current.on("offer", handleRecieveCall);
 
             socketRef.current.on("answer", handleAnswer);
 
@@ -74,7 +74,7 @@ const Room = (props) => {
         }).catch(e => console.log(e));
     }
 
-    function handleReceiveCall(incoming) {
+    function handleRecieveCall(incoming) {
         peerRef.current = createPeer();
         const desc = new RTCSessionDescription(incoming.sdp);
         peerRef.current.setRemoteDescription(desc).then(() => {
@@ -121,7 +121,7 @@ const Room = (props) => {
 
     return (
         <div>
-            <h1>Chatting with Me where the weather is good</h1>
+            <h1>Chatting with my friend number {props.testOb.test}</h1>
             <video autoPlay ref={userVideo} muted />
             <video autoPlay ref={partnerVideo} />
         </div>
