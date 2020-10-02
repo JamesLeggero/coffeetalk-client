@@ -18,7 +18,7 @@ const FarmerList = (props) => {
       setFarmers(response.data);
     }
     fetchData();
-  }, [farmers]);
+  },[farmers]);
 
   const [farmer, setFarmer] = useState({
     // username: '',
@@ -27,7 +27,7 @@ const FarmerList = (props) => {
     // imageURL: ''
   })
 
-  useEffect(() => { }, [farmer])
+  // useEffect(() => { }, [farmer])
 
   
   // const history = useHistory()
@@ -86,7 +86,7 @@ const FarmerList = (props) => {
   const showFarmers = farmers.map((farmer, i) => {
     return (
       <div key={farmer._id}>
-        <FarmerShow farmer={farmer} isLoggedIn={props.isLoggedIn} handleCreateRoom={props.handleCreateRoom} />
+        <FarmerShow farmer={farmer} roasterIsLoggedIn={props.roasterIsLoggedIn} handleCreateRoom={props.handleCreateRoom} />
       </div>
     );
   });

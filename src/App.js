@@ -11,25 +11,27 @@ import Lobby from './components/Lobby/Lobby'
 import FarmerShow from './components/FarmerShow/FarmerShow'
 import Navbar from './components/Navbar/Navbar'
 import FarmerSignUp from "./components/FarmerSignUp/FarmerSignUp";
+import RoasterSignUp from './components/RoasterSignUp/RoasterSignUp'
+import RoasterLogIn from './components/RoasterLogIn/RoasterLogIn'
 
 function App() {
 
-  // const [roasterState, setRoasterState] = useState({
-  //   username: '',
-  //   password: '',
-  //   isLoggedin: false
-  // })
+  const [roasterState, setRoasterState] = useState({
+    username: '',
+    password: '',
+    isLoggedin: false
+  })
 
   
-  // const [roasterIsLoggedIn, setRoasterisLoggedIn] = useState(false)
+  const [roasterIsLoggedIn, setRoasterIsLoggedIn] = useState(false)
 
-  // useEffect(() => {
-  //   if (localStorage.token) {
-  //     setRoasterisLoggedIn(true)
-  //   } else {
-  //     setRoasterisLoggedIn(false)
-  //   }
-  // }, [roasterIsLoggedIn])
+  useEffect(() => {
+    if (localStorage.token) {
+      setRoasterIsLoggedIn(true)
+    } else {
+      setRoasterIsLoggedIn(false)
+    }
+  }, [roasterIsLoggedIn])
 
   const [farmerState, setFarmerState] = useState({
       username: '',
@@ -74,9 +76,10 @@ function App() {
   const createRoom = (data) => {
     const id = uuid();
     const roomID = `/room/${id}`
+    
     // props.history.push(roomID)
     const roomURL = `http://localhost:3000${roomID}`
-    history.push(`/room/${id}`, {state: {farmer: data}})
+    history.push(`/room/${id}/${data}`)
   
     // console.log(roomURL)
     // return roomID
@@ -96,8 +99,7 @@ function App() {
       // weatherHit(farmerData)
       // await console.log(location.name)
       // smsHit(farmerData)
-
-      createRoom(farmerData)
+      createRoom(farmerData._id)
     } catch (error) {
       console.error(error)
     }
@@ -117,30 +119,72 @@ function App() {
         phoneNumber: farmerState.phoneNumber,
         imageURL: farmerState.imageURL
       });
-      console.log(response);
+      // console.log(response);
       localStorage.token = response.data.token;
       setFarmerIsLoggedIn(true);
+      window.history.back()
     } catch (err) {
       console.log(err);
     }
   }
 
-  const handleLogOut = () => {
+  const handleRoasterInput = (event) => {
+    setRoasterState({ ...roasterState, [event.target.name]: event.target.value });
+  };
+
+  const handleRoasterSignup = async event => {
+    event.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:3001/roasters/signup", {
+        username: roasterState.username,
+        password: roasterState.password,
+      });
+      // console.log(response);
+      localStorage.token = response.data.token;
+      setRoasterIsLoggedIn(true);
+      history.push('/')
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  const handleRoasterLogIn = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:3001/roasters/login", {
+        username: roasterState.username,
+        password: roasterState.password,
+      });
+      localStorage.token = response.data.token;
+      setRoasterIsLoggedIn(true);
+      history.push('/')
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleLogOut = (event) => {
+    event.preventDefault()
     // setRoasterState({
     //   username: "",
     //   password: "",
     //   isLoggedIn: false,
     // });
-    setFarmerState({
-      username: '',
-      password: '',
-      farmerLocation: '',
-      phoneNumber: '',
-      imageURL: '',
-      farmerIsLoggedIn: false
+    // setFarmerState({
+    //   username: '',
+    //   password: '',
+    //   farmerLocation: '',
+    //   phoneNumber: '',
+    //   imageURL: '',
+    //   farmerIsLoggedIn: false
       
-    })
-    localStorage.clear();
+    // })
+    setRoasterIsLoggedIn(false)
+    setFarmerIsLoggedIn(false)
+    localStorage.clear()
+    // history.push('/')
+    
+    
   };
 
   // // const handleCreateRoom = event => {
@@ -191,8 +235,8 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar farmerIsLoggedIn={farmerIsLoggedIn} handleLogOut={handleLogOut}/>
-      <FarmerList handleCreateRoom={handleCreateRoom}/>
+      <Navbar farmerIsLoggedIn={farmerIsLoggedIn} roasterIsLoggedIn={roasterIsLoggedIn} handleLogOut={handleLogOut}/>
+      <FarmerList handleCreateRoom={handleCreateRoom} roasterIsLoggedIn={roasterIsLoggedIn}/>
       {/* <WeatherTest /> */}
       {/* <Router> */}
       <Switch>
@@ -206,8 +250,21 @@ function App() {
             <FarmerSignUp farmerIsLoggedIn={farmerIsLoggedIn} handleFarmerSignup={handleFarmerSignup} handleFarmerInput={handleFarmerInput} />
           )
         }} />
+        <Route path='/roasters/signup' render={props => {
+          return (
+            <RoasterSignUp roasterIsLoggedIn={roasterIsLoggedIn} handleRoasterSignup={handleRoasterSignup} handleRoasterInput={handleRoasterInput} />
+          )
+        }} />
+        <Route path='/roasters/login' render={props => {
+          return (
+            <RoasterLogIn roasterIsLoggedIn={roasterIsLoggedIn}
+            handleRoasterInput={handleRoasterInput}
+            handleRoasterLogIn={handleRoasterLogIn} />
+          )
+        }} />
         
-        <Route path='/room/:roomID' render={(props)=><Room testOb={testOb} farmer={farmer} {...props}/>} />
+        {/* <Route path='/room/:roomID' render={(props)=><Room testOb={testOb} farmer={farmer} {...props}/>} /> */}
+        <Route path='/room/:roomID' component={Room} />
         
           {/* <Room farmer={farmer} location={location}/> */}
        

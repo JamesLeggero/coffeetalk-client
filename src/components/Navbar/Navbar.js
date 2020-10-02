@@ -7,7 +7,7 @@ function Navbar(props) {
       <a href="/">Home</a>
     </li>,
   ];
-  if (props.roasterIsLoggedIn || props.farmerIsLoggedIn) {
+  if (props.roasterIsLoggedIn === true || props.farmerIsLoggedIn === true) {
     navBarItems.push(
       <li key={2}>
         <a href="/logout" onClick={props.handleLogOut}>Log Out</a>
