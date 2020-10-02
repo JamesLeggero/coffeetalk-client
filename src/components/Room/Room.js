@@ -1,5 +1,6 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import io from "socket.io-client";
+import axios from 'axios'
 
 const Room = (props) => {
     const userVideo = useRef();
@@ -119,11 +120,43 @@ const Room = (props) => {
         partnerVideo.current.srcObject = e.streams[0];
     };
 
+    const [location, setLocation] = useState({})
+
+    useEffect(() => {
+        async function weatherHit() {
+            try {
+                const weatherResponse = await axios.get(`http://localhost:3001/weather/${props.farmer.farmerLocation}`)
+                const weatherData = await weatherResponse.data
+                console.log(weatherData.weather[0])
+                await setLocation({ ...weatherData })
+              } catch (error) {
+                console.error(error)
+              }
+        };
+        weatherHit()
+    }, [])
+
+    // const [farmer, setFarmer] = useState({})
+
+    // useEffect(() => {
+    //     async function fetchFarmer() {
+    //         const response = await axios.get(`http://localhost:3001/farmers/${props.farmer._id}`)
+    //         setFarmer(response.data)
+    //     }
+    //     fetchFarmer()
+    // }, [farmer])
+
     return (
         <div>
-            <h1>Chatting with my friend number {props.testOb.test}</h1>
+            {Object.keys(location).length > 0 &&
+        
+            
+            <h1>Chatting with my friend {props.farmer.username} where the conditions in {location.name} are {location.weather[0].description} </h1>
+            }
             <video autoPlay ref={userVideo} muted />
             <video autoPlay ref={partnerVideo} />
+
+            
         </div>
     );
 };

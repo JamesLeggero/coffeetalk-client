@@ -29,7 +29,7 @@ function App() {
   //   }
   // }, [roasterIsLoggedIn])
 
-  // const [location, setLocation] = useState({})
+  const [location, setLocation] = useState({})
   
   // // const [farmers, setFarmers] = useState([]);
   // // useEffect(() => {
@@ -41,42 +41,45 @@ function App() {
   // //   fetchData();
   // // }, [farmers]);
 
-  // const [farmer, setFarmer] = useState({})
+  const [farmer, setFarmer] = useState({})
 
-  // useEffect(() => { }, [farmer])
+  useEffect(() => { }, [farmer])
 
   
 
-  // const history = useHistory()
+  const history = useHistory()
   
-  // const createRoom = () => {
-  //   const id = uuid();
-  //   const roomID = `/room/${id}`
-  //   // props.history.push(roomID)
-  //   const roomURL = `http://localhost:3000${roomID}`
-  //   props.history.push(`/room/${id}`)
+  const createRoom = () => {
+    const id = uuid();
+    const roomID = `/room/${id}`
+    // props.history.push(roomID)
+    const roomURL = `http://localhost:3000${roomID}`
+    history.push(`/room/${id}`)
   
-  //   console.log(roomURL)
-  //   return roomID
+    // console.log(roomURL)
+    // return roomID
     
-  // }
+  }
   
-  // const handleCreateRoom = async event => {
-  //   event.persist()
-  //   try {
-  //     const farmerResponse = await axios.get(`http://localhost:3001/farmers/${event.target.id}`)
-  //     const farmerData = await farmerResponse.data
-  //     // await console.log(`http://localhost:3001/${farmerData.farmerLocation}`)
-  //     setFarmer({ ...farmer, ...farmerData })
-  //     //weather
-  //     // await console.log(location)
-  //     weatherHit(farmerData)
-  //     smsHit(farmerData)
-  //     createRoom()
-  //   } catch (error) {
-  //     console.error(error)
-  //   }
-  // }
+  const handleCreateRoom = async event => {
+    event.persist()
+    try {
+      const farmerResponse = await axios.get(`http://localhost:3001/farmers/${event.target.id}`)
+      const farmerData = await farmerResponse.data
+      // await console.log(`http://localhost:3001/${farmerData.farmerLocation}`)
+      setFarmer({ ...farmer, ...farmerData })
+      //weather
+      // await console.log(location)
+
+      // weatherHit(farmerData)
+      // await console.log(location.name)
+      // smsHit(farmerData)
+
+      createRoom()
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   // // const handleCreateRoom = event => {
   // //   event.persist()
@@ -126,7 +129,7 @@ function App() {
 
   return (
     <div className="App">
-      <FarmerList />
+      <FarmerList handleCreateRoom={handleCreateRoom}/>
       {/* <WeatherTest /> */}
       {/* <Router> */}
       <Switch>
@@ -136,7 +139,7 @@ function App() {
         </Route> */}
         <Route path='/' exact component={CreateRoom} />
         {/* <Route path='/room/:roomID/' exact component={Room} /> */}
-        <Route path='/room/:roomID' render={(props)=><Room testOb={testOb} {...props}/>} />
+        <Route path='/room/:roomID' render={(props)=><Room testOb={testOb} farmer={farmer} {...props}/>} />
         
           {/* <Room farmer={farmer} location={location}/> */}
        
