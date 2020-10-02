@@ -37,7 +37,7 @@ function App() {
       farmerLocation: '',
       phoneNumber: '',
       imageURL: '',
-      isLoggedin: false
+      farmerIsLoggedIn: false
     })
   
     
@@ -111,7 +111,7 @@ function App() {
     event.preventDefault();
     try {
       const response = await axios.post("http://localhost:3001/farmers/signup", {
-        username: farmerState.email,
+        username: farmerState.username,
         password: farmerState.password,
         farmerLocation: farmerState.farmerLocation,
         phoneNumber: farmerState.phoneNumber,
@@ -124,6 +124,24 @@ function App() {
       console.log(err);
     }
   }
+
+  const handleLogOut = () => {
+    // setRoasterState({
+    //   username: "",
+    //   password: "",
+    //   isLoggedIn: false,
+    // });
+    setFarmerState({
+      username: '',
+      password: '',
+      farmerLocation: '',
+      phoneNumber: '',
+      imageURL: '',
+      farmerIsLoggedIn: false
+      
+    })
+    localStorage.clear();
+  };
 
   // // const handleCreateRoom = event => {
   // //   event.persist()
@@ -173,7 +191,7 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar farmerIsLoggedIn={farmerIsLoggedIn} />
+      <Navbar farmerIsLoggedIn={farmerIsLoggedIn} handleLogOut={handleLogOut}/>
       <FarmerList handleCreateRoom={handleCreateRoom}/>
       {/* <WeatherTest /> */}
       {/* <Router> */}
