@@ -235,27 +235,32 @@ function App() {
   return (
     <div className="App">
       <Navbar farmerIsLoggedIn={farmerIsLoggedIn} roasterIsLoggedIn={roasterIsLoggedIn} handleLogOut={handleLogOut}/>
-      <FarmerList handleCreateRoom={handleCreateRoom} roasterIsLoggedIn={roasterIsLoggedIn}/>
+      {/* <FarmerList handleCreateRoom={handleCreateRoom} roasterIsLoggedIn={roasterIsLoggedIn}/> */}
       <Switch>
-        <Route path='/' exact component={Lobby} />
-        <Route path='/farmers/signup' render={props => {
+        {/* <Route path='/' exact component={Lobby} /> */}
+        <Route exact path='/' render={props => {
+          return (
+            <FarmerList handleCreateRoom={handleCreateRoom} roasterIsLoggedIn={roasterIsLoggedIn}/>
+          )
+        }} />
+        <Route exact path='/farmers/signup' render={props => {
           return (
             <FarmerSignUp farmerIsLoggedIn={farmerIsLoggedIn} handleFarmerSignup={handleFarmerSignup} handleFarmerInput={handleFarmerInput} />
           )
         }} />
-        <Route path='/roasters/signup' render={props => {
+        <Route exact path='/roasters/signup' render={props => {
           return (
             <RoasterSignUp roasterIsLoggedIn={roasterIsLoggedIn} handleRoasterSignup={handleRoasterSignup} handleRoasterInput={handleRoasterInput} />
           )
         }} />
-        <Route path='/roasters/login' render={props => {
+        <Route exact path='/roasters/login' render={props => {
           return (
             <RoasterLogIn roasterIsLoggedIn={roasterIsLoggedIn}
             handleRoasterInput={handleRoasterInput}
             handleRoasterLogIn={handleRoasterLogIn} />
           )
         }} />
-        <Route path='/room/:roomID' component={Room} />
+        <Route exact path='/room/:roomID' component={Room} />
       </Switch>
     </div>
   );

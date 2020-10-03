@@ -29,11 +29,11 @@ function Navbar(props) {
           <a href="/farmers/signup">Farmer Sign Up</a>
         </li>
       );
-      navBarItems.push(
-        <li key={6}>
-          <a href="/farmers/login">Farmer Log In</a>
-        </li>
-      );
+    //   navBarItems.push(
+    //     <li key={6}>
+    //       <a href="/farmers/login">Farmer Log In</a>
+    //     </li>
+    //   );
   }
 
   return (
