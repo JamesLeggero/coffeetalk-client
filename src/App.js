@@ -100,7 +100,7 @@ function App() {
       // await console.log(location.name)
       // smsHit(farmerData)
       
-      createRoom(farmerData._id, localStorage.roasterID)
+      await createRoom(farmerData._id, localStorage.roasterID)
     } catch (error) {
       console.error(error)
     }
