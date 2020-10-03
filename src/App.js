@@ -240,13 +240,7 @@ function App() {
     <div className="App">
       <Navbar farmerIsLoggedIn={farmerIsLoggedIn} roasterIsLoggedIn={roasterIsLoggedIn} handleLogOut={handleLogOut}/>
       <FarmerList handleCreateRoom={handleCreateRoom} roasterIsLoggedIn={roasterIsLoggedIn}/>
-      {/* <WeatherTest /> */}
-      {/* <Router> */}
       <Switch>
-        {/* <Route path='/' exact component={Lobby} handleCreateRoom={handleCreateRoom} pop={pop}/> */}
-        {/* <Route path='/' exact component={Lobby}>
-          <Lobby pop={pop} handleCreateRoom={handleCreateRoom}/>
-        </Route> */}
         <Route path='/' exact component={Lobby} />
         <Route path='/farmers/signup' render={props => {
           return (
@@ -265,15 +259,8 @@ function App() {
             handleRoasterLogIn={handleRoasterLogIn} />
           )
         }} />
-        
-        {/* <Route path='/room/:roomID' render={(props)=><Room testOb={testOb} farmer={farmer} {...props}/>} /> */}
         <Route path='/room/:roomID' component={Room} />
-        
-          {/* <Room farmer={farmer} location={location}/> */}
-       
       </Switch>
-      {/* </Router> */}
-      
     </div>
   );
 }
