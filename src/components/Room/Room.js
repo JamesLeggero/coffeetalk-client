@@ -135,17 +135,17 @@ const Room = (props) => {
                 console.log(farmerID)
                 const roasterID = window.location.href.slice(-24)
 
-                const farmerResponse = await axios.get(`https://jml-coffeetalk-api.herokuapp.com/farmers/${farmerID}`)
+                const farmerResponse = await axios.get(`http://localhost:3001/farmers/${farmerID}`)
                 const farmerData = farmerResponse.data
                 setFarmer(farmerData)
-                const roasterResponse = await axios.get(`https://jml-coffeetalk-api.herokuapp.com/roasters/${roasterID}`)
+                const roasterResponse = await axios.get(`http://localhost:3001/roasters/${roasterID}`)
                 const roasterData = roasterResponse.data
                 setRoaster(roasterData)
                 // setFarmer(farmerLoad.state)
                 // console.log(farmerData)
 
-                // const weatherResponse = await axios.get(`https://jml-coffeetalk-api.herokuapp.com/weather/${farmerData.farmerLocation}`)
-                const weatherResponse = await axios.get(`https://jml-coffeetalk-api.herokuapp.com/weather/${farmerData.farmerLocation}`)
+                // const weatherResponse = await axios.get(`http://localhost:3001/weather/${farmerData.farmerLocation}`)
+                const weatherResponse = await axios.get(`http://localhost:3001/weather/${farmerData.farmerLocation}`)
                 const weatherData = await weatherResponse.data
                 // console.log(weatherData.weather[0])
                 await setLocation({ ...weatherData })
@@ -160,7 +160,7 @@ const Room = (props) => {
 
     // useEffect(() => {
     //     async function fetchFarmer() {
-    //         const response = await axios.get(`https://jml-coffeetalk-api.herokuapp.com/farmers/${props.farmer._id}`)
+    //         const response = await axios.get(`http://localhost:3001/farmers/${props.farmer._id}`)
     //         setFarmer(response.data)
     //         // console.log(response.data)
     //     }

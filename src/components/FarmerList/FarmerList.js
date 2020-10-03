@@ -14,7 +14,7 @@ const FarmerList = (props) => {
   useEffect(() => {
     // Need to wrap this in an async function to use await inside:
     async function fetchData() {
-      const response = await axios.get("https://jml-coffeetalk-api.herokuapp.com/farmers");
+      const response = await axios.get("http://localhost:3001/farmers");
       setFarmers(response.data);
     }
     fetchData();
@@ -46,9 +46,9 @@ const FarmerList = (props) => {
   // const handleCreateRoom = async event => {
   //   event.persist()
   //   try {
-  //     const farmerResponse = await axios.get(`https://jml-coffeetalk-api.herokuapp.com/farmers/${event.target.id}`)
+  //     const farmerResponse = await axios.get(`http://localhost:3001/farmers/${event.target.id}`)
   //     const farmerData = await farmerResponse.data
-  //     // await console.log(`https://jml-coffeetalk-api.herokuapp.com/${farmerData.farmerLocation}`)
+  //     // await console.log(`http://localhost:3001/${farmerData.farmerLocation}`)
   //     setFarmer({ ...farmer, ...farmerData })
   //     //weather
   //     // await console.log(location)
@@ -66,7 +66,7 @@ const FarmerList = (props) => {
 
   // const weatherHit = async data => {
   //   try {
-  //     const weatherResponse = await axios.get(`https://jml-coffeetalk-api.herokuapp.com/weather/${data.farmerLocation}`)
+  //     const weatherResponse = await axios.get(`http://localhost:3001/weather/${data.farmerLocation}`)
   //     const weatherData = await weatherResponse.data
   //     setLocation({ ...weatherData })
   //   } catch (error) {
@@ -76,7 +76,7 @@ const FarmerList = (props) => {
   // }
 
   // const smsHit = async data => {
-  //   const smsResponse = await axios.get(`https://jml-coffeetalk-api.herokuapp.com/sms/${data.phoneNumber}`)
+  //   const smsResponse = await axios.get(`http://localhost:3001/sms/${data.phoneNumber}`)
   //   const smsData = await smsResponse.data
   //   console.log('calling: ', smsData)
 
