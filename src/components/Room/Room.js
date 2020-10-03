@@ -123,6 +123,7 @@ const Room = (props) => {
 
     const [location, setLocation] = useState({})
     const [farmer, setFarmer] = useState({})
+    const [roaster, setRoaster] = useState({})
 
     // const farmerLoad = useLocation()
     // console.log(farmerLoad.state)
@@ -130,12 +131,16 @@ const Room = (props) => {
     useEffect(() => {
         async function weatherHit() {
             try {
-                const farmerID = window.location.href.slice(-24)
+                const farmerID = window.location.href.slice(-48, -24)
                 console.log(farmerID)
+                const roasterID = window.location.href.slice(-24)
 
                 const farmerResponse = await axios.get(`http://localhost:3001/farmers/${farmerID}`)
                 const farmerData = farmerResponse.data
                 setFarmer(farmerData)
+                const roasterResponse = await axios.get(`http://localhost:3001/roasters/${roasterID}`)
+                const roasterData = roasterResponse.data
+                setRoaster(roasterData)
                 // setFarmer(farmerLoad.state)
                 // console.log(farmerData)
 
@@ -168,7 +173,7 @@ const Room = (props) => {
             {Object.keys(location).length > 0 &&
         
             
-            <h1>Chatting with my friend {farmer.username} where the conditions in {location.name} are {location.weather[0].description} </h1>
+            <h1>{roaster.username} is chatting with {farmer.username} where the conditions in {location.name} are {location.weather[0].description} </h1>
             }
             <video autoPlay ref={userVideo} muted />
             <video autoPlay ref={partnerVideo} />

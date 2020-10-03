@@ -73,13 +73,13 @@ function App() {
 
   const history = useHistory()
   
-  const createRoom = (data) => {
+  const createRoom = (dataA, dataB) => {
     const id = uuid();
     const roomID = `/room/${id}`
     
     // props.history.push(roomID)
     const roomURL = `http://localhost:3000${roomID}`
-    history.push(`/room/${id}/${data}`)
+    history.push(`/room/${id}${dataA}${dataB}`)
   
     // console.log(roomURL)
     // return roomID
@@ -99,7 +99,8 @@ function App() {
       // weatherHit(farmerData)
       // await console.log(location.name)
       // smsHit(farmerData)
-      createRoom(farmerData._id)
+      
+      createRoom(farmerData._id, localStorage.roasterID)
     } catch (error) {
       console.error(error)
     }
@@ -141,6 +142,7 @@ function App() {
       });
       // console.log(response);
       localStorage.token = response.data.token;
+      localStorage.roasterID = response.data.id
       setRoasterIsLoggedIn(true);
       history.push('/')
     } catch (err) {
@@ -156,6 +158,7 @@ function App() {
         password: roasterState.password,
       });
       localStorage.token = response.data.token;
+      localStorage.roasterID = response.data.id
       setRoasterIsLoggedIn(true);
       history.push('/')
     } catch (error) {
