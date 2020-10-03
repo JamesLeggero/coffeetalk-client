@@ -37,12 +37,11 @@ function Navbar(props) {
   }
 
   return (
-    <>
-      <h1>Coffeetalk</h1>
+    
       <nav>
          <ul>{navBarItems}</ul>
       </nav>
-    </>
+
   );
 }
 

@@ -8,7 +8,6 @@ function FarmerSignUp(props) {
             onSubmit={props.handleFarmerSignup}
             >
                 <input type='text' name='username' placeholder='Username' onChange={props.handleFarmerInput}/>
-                <input type='password' name='password' placeholder='Password' onChange={props.handleFarmerInput}/>
                 <input type='text' name='phoneNumber' placeholder='Phone Number' onChange={props.handleFarmerInput}/>
                 <input type='text' name='imageURL' placeholder='Image URL' onChange={props.handleFarmerInput}/>
                 <select name='farmerLocation' onChange={props.handleFarmerInput}>

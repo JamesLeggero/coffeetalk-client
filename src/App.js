@@ -115,14 +115,14 @@ function App() {
     try {
       const response = await axios.post("https://jml-coffeetalk-api.herokuapp.com/farmers/signup", {
         username: farmerState.username,
-        password: farmerState.password,
+        // password: farmerState.password,
         farmerLocation: farmerState.farmerLocation,
         phoneNumber: farmerState.phoneNumber,
         imageURL: farmerState.imageURL
       });
       // console.log(response);
-      localStorage.token = response.data.token;
-      setFarmerIsLoggedIn(true);
+      // localStorage.token = response.data.token;
+      // setFarmerIsLoggedIn(true);
       window.history.back()
     } catch (err) {
       console.log(err);
@@ -183,7 +183,7 @@ function App() {
       
     // })
     setRoasterIsLoggedIn(false)
-    setFarmerIsLoggedIn(false)
+    // setFarmerIsLoggedIn(false)
     localStorage.clear()
     // history.push('/')
     
@@ -234,10 +234,19 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar farmerIsLoggedIn={farmerIsLoggedIn} roasterIsLoggedIn={roasterIsLoggedIn} handleLogOut={handleLogOut}/>
-      {/* <FarmerList handleCreateRoom={handleCreateRoom} roasterIsLoggedIn={roasterIsLoggedIn}/> */}
+      <header>
+        <h1>
+        {
+        roasterIsLoggedIn ?
+        roasterState.username + ' is using ' :
+        ''
+        
+        }
+        Coffeetalk
+        </h1>
+      </header>
+      <Navbar roasterState={roasterState} roasterIsLoggedIn={roasterIsLoggedIn} handleLogOut={handleLogOut}/>
       <Switch>
-        {/* <Route path='/' exact component={Lobby} /> */}
         <Route exact path='/' render={props => {
           return (
             <FarmerList handleCreateRoom={handleCreateRoom} roasterIsLoggedIn={roasterIsLoggedIn}/>
@@ -245,7 +254,7 @@ function App() {
         }} />
         <Route exact path='/farmers/signup' render={props => {
           return (
-            <FarmerSignUp farmerIsLoggedIn={farmerIsLoggedIn} handleFarmerSignup={handleFarmerSignup} handleFarmerInput={handleFarmerInput} />
+            <FarmerSignUp handleFarmerSignup={handleFarmerSignup} handleFarmerInput={handleFarmerInput} />
           )
         }} />
         <Route exact path='/roasters/signup' render={props => {

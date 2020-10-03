@@ -2,13 +2,12 @@ import React from "react";
 // import "./FarmerShow.css";
 
 function FarmerShow(props) {
-  const { imageUrl, username, _id } = props.farmer;
+  const { imageURL, username, _id } = props.farmer;
 
   return (
     <div className="farmer-preview">
-      {imageUrl ? 
-      <img src={imageUrl} alt={username} className="farmer-image" /> :
-      ''
+      {imageURL ? 
+      <img src={imageURL} alt={username} className="farmer-image" /> : ''
       }
       <h3>{username}</h3>
       {/* {props.isLoggedIn ? <button>Coffeetalk with {username}</button> : ""} */}
