@@ -14,7 +14,7 @@ export default function WeatherTest(props) {
     //     (async () => {
     //         try {
     //             // await console.log(query.cityID)
-    //             const response = await axios.get(`http://localhost:3001/${query.cityID}`)
+    //             const response = await axios.get(`https://jml-coffeetalk-api.herokuapp.com/${query.cityID}`)
     //             const data = await response.data
     //             await console.log(data)
     //             await setLocation({...location, ...data})
@@ -32,7 +32,7 @@ export default function WeatherTest(props) {
         event.preventDefault()
         try {
             // await console.log(query.cityID)
-            const response = await axios.get(`http://localhost:3001/${query.cityID}`)
+            const response = await axios.get(`https://jml-coffeetalk-api.herokuapp.com/${query.cityID}`)
             const data = await response.data
             await console.log(data)
             await setLocation({...location, ...data})

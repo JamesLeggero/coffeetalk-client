@@ -59,7 +59,7 @@ function App() {
   // // useEffect(() => {
   // //   // Need to wrap this in an async function to use await inside:
   // //   async function fetchData() {
-  // //     const response = await axios.get("http://localhost:3001/farmers");
+  // //     const response = await axios.get("https://jml-coffeetalk-api.herokuapp.com/farmers");
   // //     setFarmers(response.data);
   // //   }
   // //   fetchData();
@@ -75,10 +75,11 @@ function App() {
   
   const createRoom = (dataA, dataB) => {
     const id = uuid();
-    const roomID = `/room/${id}`
+    const roomID = `${id}${dataA}${dataB}`
+    axios.get(`https://jml-coffeetalk-api.herokuapp.com/sms/${roomID}`)
     
     // props.history.push(roomID)
-    history.push(`/room/${id}${dataA}${dataB}`)
+    history.push(`/room/${roomID}`)
   
     // console.log(roomURL)
     // return roomID
@@ -88,9 +89,9 @@ function App() {
   const handleCreateRoom = async event => {
     event.persist()
     try {
-      const farmerResponse = await axios.get(`http://localhost:3001/farmers/${event.target.id}`)
+      const farmerResponse = await axios.get(`https://jml-coffeetalk-api.herokuapp.com/farmers/${event.target.id}`)
       const farmerData = await farmerResponse.data
-      // await console.log(`http://localhost:3001/${farmerData.farmerLocation}`)
+      // await console.log(`https://jml-coffeetalk-api.herokuapp.com/${farmerData.farmerLocation}`)
       setFarmer({ ...farmer, ...farmerData })
       //weather
       // await console.log(location)
@@ -112,7 +113,7 @@ function App() {
   const handleFarmerSignup = async event => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3001/farmers/signup", {
+      const response = await axios.post("https://jml-coffeetalk-api.herokuapp.com/farmers/signup", {
         username: farmerState.username,
         password: farmerState.password,
         farmerLocation: farmerState.farmerLocation,
@@ -135,7 +136,7 @@ function App() {
   const handleRoasterSignup = async event => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3001/roasters/signup", {
+      const response = await axios.post("https://jml-coffeetalk-api.herokuapp.com/roasters/signup", {
         username: roasterState.username,
         password: roasterState.password,
       });
@@ -152,7 +153,7 @@ function App() {
   const handleRoasterLogIn = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3001/roasters/login", {
+      const response = await axios.post("https://jml-coffeetalk-api.herokuapp.com/roasters/login", {
         username: roasterState.username,
         password: roasterState.password,
       });
@@ -203,7 +204,7 @@ function App() {
 
   // const weatherHit = async data => {
   //   try {
-  //     const weatherResponse = await axios.get(`http://localhost:3001/weather/${data.farmerLocation}`)
+  //     const weatherResponse = await axios.get(`https://jml-coffeetalk-api.herokuapp.com/weather/${data.farmerLocation}`)
   //     const weatherData = await weatherResponse.data
   //     setLocation({ ...weatherData })
   //   } catch (error) {
@@ -213,7 +214,7 @@ function App() {
   // }
 
   // const smsHit = async data => {
-  //   const smsResponse = await axios.get(`http://localhost:3001/sms/${data.phoneNumber}`)
+  //   const smsResponse = await axios.get(`https://jml-coffeetalk-api.herokuapp.com/sms/${data.phoneNumber}`)
   //   const smsData = await smsResponse.data
   //   console.log('calling: ', smsData)
 

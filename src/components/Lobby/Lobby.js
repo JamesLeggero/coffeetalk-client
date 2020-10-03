@@ -7,7 +7,7 @@ export default function Lobby(props) {
 //     const [farmers, setFarmers] = useState([]);
 //   useEffect(() => {
 //     async function fetchData() {
-//       const response = await axios.get("http://localhost:3001/farmers");
+//       const response = await axios.get("https://jml-coffeetalk-api.herokuapp.com/farmers");
 //       setFarmers(response.data);
 //     }
 //     fetchData();
