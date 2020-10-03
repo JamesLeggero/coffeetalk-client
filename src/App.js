@@ -229,11 +229,7 @@ function App() {
   //   );
   // });
 
-  const testOb = {
-    test: 'one',
-    this: 'two',
-    thing: 'three'
-  }
+  
 
 
   return (
