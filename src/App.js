@@ -78,7 +78,6 @@ function App() {
     const roomID = `/room/${id}`
     
     // props.history.push(roomID)
-    const roomURL = `http://localhost:3000${roomID}`
     history.push(`/room/${id}${dataA}${dataB}`)
   
     // console.log(roomURL)
