@@ -9,7 +9,7 @@ import FarmerList from './components/FarmerList/FarmerList'
 import WeatherTest from './components/WeatherTest/WeatherTest'
 import Lobby from './components/Lobby/Lobby'
 import FarmerShow from './components/FarmerShow/FarmerShow'
-import Navbar from './components/Navbar/Navbar'
+import NavBar from './components/NavBar/NavBar'
 import FarmerSignUp from "./components/FarmerSignUp/FarmerSignUp";
 import RoasterSignUp from './components/RoasterSignUp/RoasterSignUp'
 import RoasterLogIn from './components/RoasterLogIn/RoasterLogIn'
@@ -254,7 +254,7 @@ function App() {
         Coffeetalk
         </h1>
       </header>
-      <Navbar roasterState={roasterState} roasterIsLoggedIn={roasterIsLoggedIn} handleLogOut={handleLogOut}/>
+      <NavBar roasterState={roasterState} roasterIsLoggedIn={roasterIsLoggedIn} handleLogOut={handleLogOut}/>
       <Switch>
         <Route exact path='/' render={props => {
           return (

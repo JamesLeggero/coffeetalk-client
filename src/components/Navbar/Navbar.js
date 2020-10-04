@@ -1,7 +1,8 @@
 import React from "react";
 // import "./NavBar.css";
+import Navbar from 'react-bootstrap/Navbar'
 
-function Navbar(props) {
+function NavBar(props) {
   let navBarItems = [
     <li key={1}>
       <a href="/">Home</a>
@@ -45,4 +46,4 @@ function Navbar(props) {
   );
 }
 
-export default Navbar;
+export default NavBar;
