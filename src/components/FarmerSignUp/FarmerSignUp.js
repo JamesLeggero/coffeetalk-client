@@ -32,7 +32,7 @@ function FarmerSignUp(props) {
 
                 <h2>Farmer Sign Up</h2>
 
-            <Form>
+            <Form onSubmit={props.handleFarmerSignup}>
 
                 <Form.Group>
                     <Form.Label>Username</Form.Label>
