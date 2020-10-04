@@ -51,7 +51,7 @@ function FarmerSignUp(props) {
 
                 <Form.Group>
                     <Form.Label>Region</Form.Label>
-                    <Form.Control as='select'>
+                    <Form.Control as='select' name='farmerLocation' onChange={props.handleFarmerInput}>
                     <option>Please choose region...</option>
                     <option value='343137'>Awasa, ET</option>
                     <option value='3606251'>Santa Barbara, HN</option>
