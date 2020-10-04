@@ -3,12 +3,12 @@ import { BrowserRouter as Router, Route, Switch, useHistory, Link } from "react-
 import axios from "axios";
 import { v1 as uuid } from 'uuid'
 
-import Navbar from 'react'
 
-import CreateRoom from './components/CreateRoom/CreateRoom'
+
+
 import Room from './components/Room/Room'
 import FarmerList from './components/FarmerList/FarmerList'
-import WeatherTest from './components/WeatherTest/WeatherTest'
+
 import Lobby from './components/Lobby/Lobby'
 import FarmerShow from './components/FarmerShow/FarmerShow'
 import NavBar from './components/NavBar/NavBar'
