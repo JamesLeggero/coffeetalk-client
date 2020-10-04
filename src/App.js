@@ -11,7 +11,7 @@ import FarmerList from './components/FarmerList/FarmerList'
 
 import Lobby from './components/Lobby/Lobby'
 import FarmerShow from './components/FarmerShow/FarmerShow'
-import NavBar from './components/NavBar/NavBar'
+import Navigation from './components/Navigation/Navigation'
 import FarmerSignUp from "./components/FarmerSignUp/FarmerSignUp";
 import RoasterSignUp from './components/RoasterSignUp/RoasterSignUp'
 import RoasterLogIn from './components/RoasterLogIn/RoasterLogIn'
@@ -260,7 +260,7 @@ function App() {
         Coffeetalk
         </h1>
       </header> */}
-      <NavBar roasterState={roasterState} roasterIsLoggedIn={roasterIsLoggedIn} handleLogOut={handleLogOut}/>
+      <Navigation roasterState={roasterState} roasterIsLoggedIn={roasterIsLoggedIn} handleLogOut={handleLogOut}/>
       <Switch>
         <Route exact path='/' render={props => {
           return (

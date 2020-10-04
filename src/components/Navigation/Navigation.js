@@ -5,7 +5,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 // import "./NavBar.css";
 import Navbar from 'react-bootstrap/Navbar'
 
-function NavBar(props) {
+function Navigation(props) {
   let navBarItems = [
     <li key={1}>
       <a href="/">Home</a>
@@ -70,4 +70,4 @@ function NavBar(props) {
   );
 }
 
-export default NavBar;
+export default Navigation;
