@@ -1,21 +1,22 @@
 import React from "react";
 // import "./FarmerShow.css";
+import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
 
 function FarmerShow(props) {
   const { imageURL, username, _id } = props.farmer;
 
   return (
-    <div className="farmer-preview">
+    <Card text='white' bg='secondary' style={{ width: "100%", minWidth: '10rem'}} border='secondary' className='text-center'>
+      <Card.Header as='h5'>{username}</Card.Header>
       {imageURL ? 
-      <img src={imageURL} alt={username} className="farmer-image" /> : ''
+      <Card.Img fluid style={{padding: '10%'}} variant='top' src={imageURL} /> : ''
       }
-      <h3>{username}</h3>
-      {/* {props.isLoggedIn ? <button>Coffeetalk with {username}</button> : ""} */}
+      <Card.Body>
       {props.roasterIsLoggedIn ? 
-      <button id={_id} onClick={props.handleCreateRoom}>Coffeetalk with {username}</button>
-      : ''
-      }
-    </div>
+      <Button id={_id} onClick={props.handleCreateRoom} variant='dark'>Coffeetalk with {username}</Button>: ''}
+      </Card.Body>
+    </Card>
   );
 }
 

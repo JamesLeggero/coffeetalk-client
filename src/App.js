@@ -22,6 +22,15 @@ function App() {
     isLoggedin: false
   })
 
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios.get(`https://jml-coffeetalk-api.herokuapp.com/roasters/${localStorage.roasterID}`);
+      setRoasterState(response.data);
+    }
+    //
+    fetchData();
+  },[]);
+
   
   const [roasterIsLoggedIn, setRoasterIsLoggedIn] = useState(false)
 
@@ -35,7 +44,7 @@ function App() {
 
   const [farmerState, setFarmerState] = useState({
       username: '',
-      password: '',
+      // password: '',
       farmerLocation: '',
       phoneNumber: '',
       imageURL: '',
@@ -43,15 +52,15 @@ function App() {
     })
   
     
-    const [farmerIsLoggedIn, setFarmerIsLoggedIn] = useState(false)
+    // const [farmerIsLoggedIn, setFarmerIsLoggedIn] = useState(false)
   
-    useEffect(() => {
-      if (localStorage.token) {
-        setFarmerIsLoggedIn(true)
-      } else {
-        setFarmerIsLoggedIn(false)
-      }
-    }, [farmerIsLoggedIn])
+    // useEffect(() => {
+    //   if (localStorage.token) {
+    //     setFarmerIsLoggedIn(true)
+    //   } else {
+    //     setFarmerIsLoggedIn(false)
+    //   }
+    // }, [farmerIsLoggedIn])
 
   const [location, setLocation] = useState({})
   
@@ -185,7 +194,7 @@ function App() {
     setRoasterIsLoggedIn(false)
     // setFarmerIsLoggedIn(false)
     localStorage.clear()
-    // history.push('/')
+    history.push('/')
     
     
   };

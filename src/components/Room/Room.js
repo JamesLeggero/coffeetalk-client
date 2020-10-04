@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { useLocation } from 'react-router-dom'
 import io from "socket.io-client";
 import axios from 'axios'
+import Container from 'react-bootstrap/Container'
 
 const Room = (props) => {
     const userVideo = useRef();
@@ -170,15 +171,28 @@ const Room = (props) => {
 
     return (
         <div>
+            <Container className='text-center'>
             {Object.keys(location).length > 0 &&
+            <div>
         
             
-            <h1>{roaster.username} is chatting with {farmer.username} where the conditions in {location.name} are {location.weather[0].description} </h1>
+            <h1>{roaster.username} is coffeetalking with {farmer.username}</h1>
+            <h2>Farmer Location: {location.name}, {location.sys.country} </h2>
+            <h3>{Math.round(location.main.temp)}&deg; F, currently {location.weather[0].description}</h3>
+            </div>
             }
-            <video autoPlay ref={userVideo} muted />
-            <video autoPlay ref={partnerVideo} />
-
             
+            <video autoPlay ref={userVideo} muted>
+                
+            </video>
+            
+            <video autoPlay ref={partnerVideo}>
+                    Waiting for {farmer.username}
+            
+                
+                </video>
+            
+                </Container>
         </div>
     );
 };

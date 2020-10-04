@@ -2,6 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from 'react-router-dom'
 import axios from "axios";
 import { v1 as uuid } from "uuid";
+import CardDeck from 'react-bootstrap/Card'
+
+import Container from "react-bootstrap/Container";
+import Row from 'react-bootstrap/Row'
+import CardGroup from 'react-bootstrap/CardGroup'
+
 
 import FarmerShow from "../FarmerShow/FarmerShow";
 
@@ -88,26 +94,31 @@ const FarmerList = (props) => {
       <div key={farmer._id}>
         <FarmerShow farmer={farmer} roasterIsLoggedIn={props.roasterIsLoggedIn} handleCreateRoom={props.handleCreateRoom} />
       </div>
-    );
-  });
+    )
+  })
+  
 
   
 
   return (
-    <div>
+    
+      
+    <Container>
+    <CardGroup  style={{
+      display: 'flex', 
+      flexDirection: 'row', 
+      justifyContent: 'space-around',
+      alignItems: 'center',
+      padding: '20px'
+    }}>
       {showFarmers}
-      {/*
-      <h3>SELECTED: {farmer.username}</h3>
-      {Object.keys(location).length > 0 &&
-        <>
-          <h3>City: {location.name}, {location.sys.country}</h3>
-          <h3>WEATHER: {location.weather[0].description}</h3>
-        </>
-      }
-    */}
-
-    </div>
+    </CardGroup>
+    </Container>
+  
+    
+    
   )
+
 
   
 
