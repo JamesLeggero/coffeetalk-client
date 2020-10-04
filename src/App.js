@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Switch, useHistory, Link } from "react-
 import axios from "axios";
 import { v1 as uuid } from 'uuid'
 
+import Navbar from 'react'
+
 import CreateRoom from './components/CreateRoom/CreateRoom'
 import Room from './components/Room/Room'
 import FarmerList from './components/FarmerList/FarmerList'
@@ -24,8 +26,10 @@ function App() {
 
   useEffect(() => {
     async function fetchData() {
+      if (localStorage.roasterID) {
       const response = await axios.get(`https://jml-coffeetalk-api.herokuapp.com/roasters/${localStorage.roasterID}`);
       setRoasterState(response.data);
+      }
     }
     //
     fetchData();
@@ -132,7 +136,7 @@ function App() {
       // console.log(response);
       // localStorage.token = response.data.token;
       // setFarmerIsLoggedIn(true);
-      window.history.back()
+      history.push('/')
     } catch (err) {
       console.log(err);
     }
@@ -176,7 +180,9 @@ function App() {
   };
 
   const handleLogOut = (event) => {
+    
     event.preventDefault()
+    
     // setRoasterState({
     //   username: "",
     //   password: "",
@@ -243,7 +249,7 @@ function App() {
 
   return (
     <div className="App">
-      <header>
+      {/* <header>
         <h1>
         {
         roasterIsLoggedIn ?
@@ -253,7 +259,7 @@ function App() {
         }
         Coffeetalk
         </h1>
-      </header>
+      </header> */}
       <NavBar roasterState={roasterState} roasterIsLoggedIn={roasterIsLoggedIn} handleLogOut={handleLogOut}/>
       <Switch>
         <Route exact path='/' render={props => {
