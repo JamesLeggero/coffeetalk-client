@@ -171,7 +171,7 @@ const Room = (props) => {
 
     return (
         <div>
-            <Container className='text-center'>
+            <Container className='text-center' style={{padding: '50px'}}>
             {Object.keys(location).length > 0 &&
             <div>
         

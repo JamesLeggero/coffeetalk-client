@@ -104,7 +104,11 @@ const FarmerList = (props) => {
     
       
     <Container className='text-center' style={{padding: '50px'}}>
+      {
+        props.roasterIsLoggedIn ?
+        <h1>Welcome! Please select a farmer to begin your coffeetalk.</h1> :
       <h1>At Coffeetalk, we bring roasters and coffee farmers together. Sign up or log in to get started.</h1>
+      } 
     <CardGroup  style={{
       display: 'flex', 
       flexDirection: 'row', 
