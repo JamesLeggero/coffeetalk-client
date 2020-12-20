@@ -8,11 +8,11 @@ function FarmerShow(props) {
   const { imageURL, username, _id } = props.farmer;
 
   return (
-    <Card text='white' bg='secondary' style={{ width: "100%", minWidth: '10rem'}} border='secondary' className='text-center mb-3'>
+    <Card text='white' bg='secondary' style={{ width: "375px", minWidth: '10rem'}} border='secondary' className='text-center mb-3'>
       <Card.Header as='h5'>{username}</Card.Header>
       {imageURL ? 
-      <Card.Img style={{padding: '10%'}} variant='top' src={imageURL} /> :
-      <Card.Img style={{padding: '10%'}} variant='top' src={ComingSoon} /> 
+      <Card.Img style={{padding: '2%'}} variant='top' src={imageURL} /> :
+      <Card.Img style={{padding: '2%'}} variant='top' src={ComingSoon} /> 
       }
       <Card.Body>
       {props.roasterIsLoggedIn ? 
